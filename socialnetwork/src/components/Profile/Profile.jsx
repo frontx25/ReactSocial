@@ -5,7 +5,7 @@ import MyPosts from "./MyPosts/MyPosts";
 const Profile = () => {
     return (
 
-        <div className={s.content}>
+        <div >
             <div><img className={s.back} src="https://cumbia.com.au/wp-content/uploads/2018/01/background-img-1.jpg" alt=""/></div>
             <div>
                 ava + descr
