@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from "../render";
+
 let state = {
     profilePage: {
         postData: [
@@ -8,6 +10,7 @@ let state = {
             {id: 5, message: 'Hi bro - 5 ', likesCount: 16, avatar: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.UMbhhQtWW5jJyxohqqgkmAAAAA%26pid%3DApi&f=1&ipt=9c6b790b42c3e84fb82920c1790216c9c960913c2be86a75e6db0b44af18b6aa&ipo=images'},
             {id: 6, message: 'Hi bro - 6 ', likesCount: 166, avatar: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.mZ2yNhcS9a14lV1Y9AzLxAAAAA%26pid%3DApi&f=1&ipt=afcc813b9dea599ea9f21f6ca5d223d6acf7e8eabcdba228137dcd94c8c9de79&ipo=images'}
         ],
+        newPostText:'cooool',
     },
     dialogsPage: {
         messages: [
@@ -27,8 +30,28 @@ let state = {
             {id: 6, name: 'Vano'}
         ],
     },
-
-
 }
+
+export let addPost = ()=> {
+    let newPost = {
+        id: 7,
+        message: state.profilePage.newPostText,
+        likesCount: 0,
+        avatar: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.mZ2yNhcS9a14lV1Y9AzLxAAAAA%26pid%3DApi&f=1&ipt=afcc813b9dea599ea9f21f6ca5d223d6acf7e8eabcdba228137dcd94c8c9de79&ipo=images'
+    }
+    state.profilePage.postData.push(newPost);
+    state.profilePage.newPostText=''; /*зануление*/
+    rerenderEntireTree(state)
+}
+
+export let updateNewPostText = (newText)=> {
+    state.profilePage.newPostText=newText;
+    rerenderEntireTree(state)
+}
+
+
+
+
+
 
 export default state
