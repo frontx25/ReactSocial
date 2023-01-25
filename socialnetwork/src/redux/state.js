@@ -60,32 +60,34 @@ let store = {
             ],
         },
     },
+    _callSubscriber() {
+        console.log('State changed')
+    },
     getState() {
         return this._state
     },
-    _callSubscriber (){
-        console.log ('State changed')
-    },
-    addPost() {
-        let newPost = {
-            id: 7,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0,
-            avatar: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.mZ2yNhcS9a14lV1Y9AzLxAAAAA%26pid%3DApi&f=1&ipt=afcc813b9dea599ea9f21f6ca5d223d6acf7e8eabcdba228137dcd94c8c9de79&ipo=images'
-        }
-        this._state.profilePage.postData.push(newPost);
-        this._state.profilePage.newPostText = ''; /*зануление*/
-        this._callSubscriber(this._state)
-    },
-    updateNewPostText (newText) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state)
-    },
-    subscribe(observer)  {
+    subscribe(observer) {
         this._callSubscriber = observer
-    }
-}
+    },
 
+    dispatch(action){
+        if (action.type==='ADD-POST'){
+            let newPost = {
+                id: 7,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0,
+                avatar: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.mZ2yNhcS9a14lV1Y9AzLxAAAAA%26pid%3DApi&f=1&ipt=afcc813b9dea599ea9f21f6ca5d223d6acf7e8eabcdba228137dcd94c8c9de79&ipo=images'
+            }
+            this._state.profilePage.postData.push(newPost);
+            this._state.profilePage.newPostText = ''; /*зануление*/
+            this._callSubscriber(this._state)
+        } else if (action.type==='UPDATE-NEW-POST-TEXT'){
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state)
+        }
+    }
+
+}
 
 
 export default store
